@@ -111,7 +111,7 @@ StripeAnimation.prototype = {
     this.lines = [];
   },
 
-  getLinesForOrientLeft() {
+  getLinesForOrientLeft: function getLinesForOrientLeftFn() {
     var lines = [];
     var stepSize = 50 / this.numberOfLinesY;
     var lineWidth = this.lineWidth;
@@ -132,7 +132,7 @@ StripeAnimation.prototype = {
     return lines;
   },
 
-  getLinesForOrientBottom() {
+  getLinesForOrientBottom: function getLinesForOrientBottomFn() {
     var lines = [];
     var stepSize = 50 / this.numberOfLinesX;
     var lineWidth = this.lineWidth;
@@ -203,8 +203,13 @@ StripeAnimation.prototype = {
 };
 
 function init() {
-  var upAnimation = new StripeAnimation(document.getElementById("canvas_up"), { orientation: ORIENTATION.BOTTOM });
-  var frontAnimation = new StripeAnimation(document.getElementById("canvas_front"), { orientation: ORIENTATION.LEFT });
+  var upAnimation = new StripeAnimation(document.getElementById("canvas_up"), {
+    orientation: ORIENTATION.BOTTOM
+  });
+
+  var frontAnimation = new StripeAnimation(document.getElementById("canvas_front"), {
+    orientation: ORIENTATION.LEFT
+  });
 
   var render = function() {
     // ticking related
