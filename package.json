@@ -1,0 +1,9 @@
+{
+  "name": "up-front.nl",
+  "version": "0.0.1",
+  "description": "Website of UpFront",
+  "repository": "https://github.com/Up-Front/up-front.nl.git",
+  "dependencies": {
+    "normalize-css": "^2.3.1"
+  }
+}
