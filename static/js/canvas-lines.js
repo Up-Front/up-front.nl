@@ -1,6 +1,5 @@
 // Shared values
 var DEFAULT_SPREAD = 2.5;
-var DEFAULT_OFFSET = 50;
 var ORIENTATION = {
   BOTTOM: 'bottom',
   LEFT: 'left'
@@ -9,10 +8,8 @@ var ORIENTATION = {
 var spread = DEFAULT_SPREAD;
 var tick = 0;
 var full = 360;
-var amplitude = 2;
-var speed = 0.0015;
-var offset = 50;
-var peak = -offset;
+var amplitude = 100;
+var speed = 0.0075;
 var lineColorTick = 0;
 var maxLineColorTick = 128 * 3;
 
@@ -117,17 +114,17 @@ StripeAnimation.prototype = {
 
     this.numberOfLinesX = Math.floor(this.width / 8);
     this.numberOfLinesY = Math.floor(this.height / 6);
-    this.lineWidth = (100 / this.numberOfLinesX) * 0.35;
+    this.lineWidth = (100 / this.numberOfLinesX) * 0.2;
   },
 
   getLinesForOrientLeft() {
     var lines = [];
     var stepSize = 50 / this.numberOfLinesY;
     var lineWidth = this.lineWidth;
-    var thickness = 0.25;
+    var thickness = 0.45;
 
-    for (var i = -offset; i < 100 - offset; i += stepSize) {
-      var topY = (i * spread) + (Math.sin(i * 0.5));
+    for (var i = -50; i < 20; i += stepSize) {
+      var topY = (i * spread);
       var leftX = i + (Math.sin(i * 0.075));
       var extraWidthX = 1 + Math.sin(i * 0.5);
       lines.push(offsetY([
@@ -135,7 +132,7 @@ StripeAnimation.prototype = {
         [0, leftX + lineWidth],
         [100, topY + lineWidth + thickness],
         [100, topY],
-      ], offset));
+      ], 58));
     }
 
     return lines;
@@ -145,17 +142,18 @@ StripeAnimation.prototype = {
     var lines = [];
     var stepSize = 50 / this.numberOfLinesX;
     var lineWidth = this.lineWidth;
-    var thickness = 0.25;
+    var thickness = 0.15;
 
     for (var i = -25; i < 75; i += stepSize) {
-      var topX = (i * spread) + (Math.sin(i * 0.5));
-      var bottomX = i + (Math.sin(i * 0.075));
+      var topX = (i * spread);
+      var bottomX = i;
+
       lines.push(offsetX([
         [bottomX, 100],
         [bottomX + lineWidth, 100],
         [topX + lineWidth + thickness, 0],
         [topX, 0],
-      ], 26));
+      ], 26.75));
     }
 
     return lines;
@@ -218,8 +216,7 @@ new StripeAnimation(document.getElementById("canvas_front"), { orientation: ORIE
 
 // 1 Animation calculation
 setInterval(function() {
-  spread = DEFAULT_SPREAD + (180 - Math.sin(tick) * amplitude) * 0.01;
-  offset = DEFAULT_OFFSET + (0.5  * (10 - Math.sin(tick * 0.25) * 25));
+  spread = DEFAULT_SPREAD + (180 - Math.sin(tick) * amplitude) * 0.002;
   tick += speed;
   lineColorTick += 0.25;
 
