@@ -7,11 +7,15 @@ var ORIENTATION = {
 
 var spread = DEFAULT_SPREAD;
 var tick = 0;
+var speed = 0.0075;
+
 var full = 360;
 var amplitude = 100;
-var speed = 0.0075;
+
 var lineColorTick = 0;
+var lineColorTickSpeed = 0.25;
 var maxLineColorTick = 128 * 3;
+
 
 function normalize(point, pixels) {
   return (pixels / 100) * point;
@@ -85,20 +89,9 @@ function StripeAnimation(canvas, options) {
   ['render', 'lineTo', 'fillArea'].forEach(function(func) {
     self[func] = self[func].bind(self);
   })
-
-  this.animationFrameId = requestAnimationFrame( this.render );
-  window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
 }
 
 StripeAnimation.prototype = {
-  onWindowResize: function onWindowResizeFn() {
-    if (this.reapplyDimensionsTimeoutId) {
-      clearTimeout(this.reapplyDimensionsTimeoutId);
-    }
-
-    this.reapplyDimensionsTimeoutId = setTimeout(this.setDimensions.bind(this), 250);
-  },
-
   setDimensions: function setDimensionsFn() {
     var dims = this.canvas.getBoundingClientRect();
     this.width = dims.width;
@@ -115,6 +108,7 @@ StripeAnimation.prototype = {
     this.numberOfLinesX = Math.floor(this.width / 8);
     this.numberOfLinesY = Math.floor(this.height / 6);
     this.lineWidth = (100 / this.numberOfLinesX) * 0.2;
+    this.lines = [];
   },
 
   getLinesForOrientLeft() {
@@ -159,15 +153,14 @@ StripeAnimation.prototype = {
     return lines;
   },
 
+  prepareRender: function prepareRenderFn() {
+    this.lines = this.orientation === ORIENTATION.BOTTOM ?
+        this.getLinesForOrientBottom() : this.getLinesForOrientLeft();
+  },
+
   render: function renderFn() {
-    var lines = this.orientation === ORIENTATION.BOTTOM ?
-                this.getLinesForOrientBottom() : this.getLinesForOrientLeft();
-
-    // start rendering
     this.context.clearRect(0, 0, this.width, this.height);
-    lines.forEach(this.fillArea);
-
-    requestAnimationFrame( this.render );
+    this.lines.forEach(this.fillArea);
   },
 
   fillArea: function fillAreaFn(_tuples, i) {
@@ -209,20 +202,36 @@ StripeAnimation.prototype = {
   }
 };
 
-new StripeAnimation(document.getElementById("canvas_up"), { orientation: ORIENTATION.BOTTOM });
-new StripeAnimation(document.getElementById("canvas_front"), { orientation: ORIENTATION.LEFT });
+function init() {
+  var upAnimation = new StripeAnimation(document.getElementById("canvas_up"), { orientation: ORIENTATION.BOTTOM });
+  var frontAnimation = new StripeAnimation(document.getElementById("canvas_front"), { orientation: ORIENTATION.LEFT });
 
-// 1 Animation calculation
-setInterval(function() {
-  spread = DEFAULT_SPREAD + (180 - Math.sin(tick) * amplitude) * 0.002;
-  tick += speed;
-  lineColorTick += 0.25;
+  var render = function() {
+    // ticking related
+    spread = DEFAULT_SPREAD + (180 - Math.sin(tick) * amplitude) * 0.002;
+    tick += speed;
+    lineColorTick += lineColorTickSpeed;
 
-  if (tick === full) {
-    tick = 0;
-  }
+    if (tick === full) {
+      tick = 0;
+    }
 
-  if (lineColorTick === maxLineColorTick) {
-    lineColorTick = 0;
-  }
-}, 1000/60);
+    if (lineColorTick === maxLineColorTick) {
+      lineColorTick = 0;
+    }
+
+    // calculation related
+    upAnimation.prepareRender();
+    frontAnimation.prepareRender();
+
+    // rendering
+    upAnimation.render();
+    frontAnimation.render();
+
+    requestAnimationFrame(render);
+  };
+
+  requestAnimationFrame(render);
+}
+
+init();
