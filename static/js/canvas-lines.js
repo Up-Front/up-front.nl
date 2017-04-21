@@ -82,7 +82,7 @@ function StripeAnimation(canvas, options) {
   this.setDimensions();
 
   var self = this;
-  ['render', 'lineTo'].forEach(function(func) {
+  ['render', 'lineTo', 'fillArea'].forEach(function(func) {
     self[func] = self[func].bind(self);
   })
 
@@ -165,9 +165,7 @@ StripeAnimation.prototype = {
 
     // start rendering
     this.context.clearRect(0, 0, this.width, this.height);
-    lines.forEach(function(line, i) {
-      this.fillArea(line, i);
-    }.bind(this));
+    lines.forEach(this.fillArea);
 
     requestAnimationFrame( this.render );
   },
