@@ -1,0 +1,22 @@
+{
+  "name": "up-front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "catw -c 'lessc -' 'style/**.less' > static/css/upfront.min.css",
+    "watch-css": "catw -c 'lessc -' 'style/**.less' -o static/css/upfront.min.css -v"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap-css": "^3.0.0",
+    "catw": "^1.0.1"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "less": "~1.5.1"
+  }
+}
