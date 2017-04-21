@@ -1,0 +1,47 @@
+@import "./style/vars";
+@import "./node_modules/bootstrap/less/bootstrap";
+@import "./style/bootstrap-overwrites";
+@import "./style/body";
+
+@logo-height: 160px;
+@logo-width: 640px;
+@up-width: 220px;
+
+.logo {
+  position: absolute;
+  width: @logo-width;
+  height: @logo-height;
+  left: 50%;
+  top: 20px;
+  margin-left: -(@logo-width/2);
+}
+
+.logo--font-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: @logo-height;
+}
+
+.logo--canvas-up {
+  position: absolute;
+  left: 0;
+  width: @up-width;
+  height: @logo-height;
+}
+
+.logo--canvas-front {
+  position: absolute;
+  left: @up-width;
+  width: @logo-width - @up-width;
+  height: @logo-height;
+}
+
+.logo--svg {
+  height: @logo-height;
+}
+
+.logo--mask-rect {
+  fill: @body-background;
+}
