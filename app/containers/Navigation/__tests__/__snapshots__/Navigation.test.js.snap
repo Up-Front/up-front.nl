@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <ul>
+    <li>
+      <a
+        onClick={[Function]}
+        style={Object {}}
+      >
+        Bakker Bollebof
+      </a>
+    </li>
+    <li>
+      <a
+        onClick={[Function]}
+        style={Object {}}
+      >
+        Sjakie Slager
+      </a>
+    </li>
+  </ul>
+  <a
+    onClick={[Function]}
+    style={Object {}}
+  >
+    Home
+  </a>
+  <a
+    onClick={[Function]}
+    style={Object {}}
+  >
+    DNS
+  </a>
+  <a
+    onClick={[Function]}
+    style={Object {}}
+  >
+    Instellingen
+  </a>
+</div>
+`;
