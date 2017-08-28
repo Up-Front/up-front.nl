@@ -35,12 +35,26 @@ module.exports = {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new ExtractTextPlugin('[name].bundle.css')
   ],
   module: {
-    loaders: [{
-      test: /\.js?$/,
-      loader: 'babel-loader',
-      include: path.join(__dirname, 'app'),
-    }],
+    rules: [
+      {
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        include: path.join(__dirname, 'app'),
+      }, {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: { importLoaders: 1 },
+            },
+            'postcss-loader',
+          ],
+        }),
+      },
+    ],
   },
 };

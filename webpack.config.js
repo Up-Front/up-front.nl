@@ -1,17 +1,21 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: '#source-map',
+
   entry: [
     'webpack-hot-middleware/client',
     './app/index.js',
   ],
+
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'app.js',
     publicPath: '/',
   },
+
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -21,7 +25,9 @@ module.exports = {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
       }
     }),
+    new ExtractTextPlugin('styles.css')
   ],
+
   resolve: {
     modules: [
       'app',
@@ -30,15 +36,34 @@ module.exports = {
     extensions: [
       '.js',
       '.jsx',
-      '.react.js',
+      '.css',
     ],
     enforceExtension: false,
   },
+  
   module: {
-    loaders: [{
-      test: /\.js?$/,
-      loader: 'babel-loader',
-      include: path.join(__dirname, 'app'),
-    }],
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: { 
+                importLoaders: 1,
+                modules: true,
+                localIdentName: '[local]--[hash:base64:5]' 
+              },
+            },
+            'postcss-loader',
+          ],
+        }),
+      },
+      {
+        test: /\.js?$/,
+        loader: 'babel-loader',
+        include: path.join(__dirname, 'app'),
+      }
+    ],
   },
 };

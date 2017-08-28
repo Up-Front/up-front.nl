@@ -1,0 +1,26 @@
+@import '../../styles/variables.css';
+
+.wrapper {
+	background: #fff;
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+
+.wrapper > div {
+	padding: 2em 1em;
+}
+
+.home {
+	border-right: 3px solid var(--color-green);
+}
+
+.logo {
+	text-align: left;
+}
+
+.contact {
+	border-left: 3px solid var(--color-green);
+}

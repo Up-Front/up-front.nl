@@ -1,6 +1,12 @@
 /* eslint-disable no-console */
 require('babel-core/register');
 
+const hook = require('css-modules-require-hook');
+
+hook({
+  generateScopedName: '[local]--[hash:base64:5]'
+});
+
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');

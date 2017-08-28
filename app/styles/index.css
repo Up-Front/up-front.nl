@@ -1,0 +1,22 @@
+@import 'reset-css/reset.css';
+
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:300,400,700');
+
+@import 'variables.css';
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+	background: var(--color-green);
+	font-family: 'Zilla Slab', serif;
+}
+
+.wrapper {
+	padding-top: 5em;
+}

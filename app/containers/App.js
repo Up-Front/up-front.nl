@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 
-import Navigation from './Navigation';
+import Navigation from '../components/Navigation';
 
-const App = ({ children }) => (
-  <div>
-    <Helmet
-      title="BizHost"
-      titleTemplate="%s - BizHost"
-      meta={[
-        { 'char-set': 'utf-8' },
-        { name: 'description', content: 'My super dooper dope app' },
-      ]}
-    />
-    <Navigation />
-    {children}
-  </div>
-);
+import styles from '../styles/index.css';
+
+class App extends PureComponent {
+
+  render() {
+    const { children } = this.props;
+    return (
+      <div>
+        <Helmet
+          title="UpFront"
+          titleTemplate="%s - UpFront"
+          meta={[
+            { 'char-set': 'utf-8' },
+            { 'viewport': 'width=device-width, initial-scale=1.0' }
+          ]}
+        />
+        <Navigation />
+
+        <div className={styles.wrapper}>
+          {children}
+        </div>
+      </div>
+    )
+  }
+}
 
 App.propTypes = {
   children: PropTypes.oneOfType([
@@ -27,4 +39,8 @@ App.propTypes = {
   ]).isRequired,
 };
 
-export default App;
+const mapStateToProps = ({ states }) => ({
+  states,
+});
+
+export default connect(mapStateToProps)(App);

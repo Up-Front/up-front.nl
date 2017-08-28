@@ -1,7 +1,7 @@
 import { combineReducers} from 'redux';
 
-import sites from './containers/Navigation/reducer';
+// import states from './containers/StateSync/reducer';
 
 export default combineReducers({
-  sites,
+  // states,
 });

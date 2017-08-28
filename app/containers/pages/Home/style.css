@@ -1,0 +1,11 @@
+@import '../../../styles/variables.css';
+
+.wrapper {
+	display: flex;
+}
+
+.content {
+	background: #000;
+	min-height: calc(100vh - 5em);
+	border-bottom: 1px solid #fff;
+}

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className={undefined}
+>
+  <div>
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="/"
+    >
+      Home
+    </Link>
+    <Link
+      onlyActiveOnIndex={false}
+      style={Object {}}
+      to="/Switches"
+    >
+      Switches
+    </Link>
+  </div>
+  <div>
+    <Connect(StateSync) />
+  </div>
+</div>
+`;

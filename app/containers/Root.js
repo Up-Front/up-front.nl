@@ -19,13 +19,14 @@ const Root = ({ content, head, initialState }) => (
       {head.title.toComponent()}
       {head.meta.toComponent()}
       {head.link.toComponent()}
+      <link rel="stylesheet" type="text/css" href="/styles.css" />
     </head>
     <body>
       <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
       {renderEnvironment()}
       {initialState && renderInitialState(initialState)}
       {head.script.toComponent()}
-      <script src={!process.env.NODE_ENV ? '/app.js' : '/app.min.js'} />
+      <script src={process.env.NODE_ENV === 'production' ? '/app.min.js' : '/app.js'} />
     </body>
   </html>
 );
