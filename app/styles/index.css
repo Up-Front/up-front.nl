@@ -19,4 +19,7 @@ body {
 
 .wrapper {
 	padding-top: 5em;
+	position: absolute;
+	height: 100%;
+	width: 100%;
 }

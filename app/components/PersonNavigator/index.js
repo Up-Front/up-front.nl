@@ -14,7 +14,6 @@ class PersonNavigator extends Component {
         <div className={styles.person}>IMG</div>
         <div className={styles.person}>IMG</div>
         <div className={styles.person}>IMG</div>
-
       </div>
     );
   }

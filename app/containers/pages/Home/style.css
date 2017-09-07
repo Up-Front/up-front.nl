@@ -2,10 +2,75 @@
 
 .wrapper {
 	display: flex;
+	height: 100%;
 }
 
-.content {
-	background: #000;
-	min-height: calc(100vh - 5em);
-	border-bottom: 1px solid #fff;
+.screenPart {
+	display: flex;
+	position: relative;
+	min-height: 100%;
+	background: #333;
+}
+
+.personNavigator {
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	width: 20%;
+}
+
+.contentWrapper {
+	width: 80%;
+	margin-left: 20%;
+}
+
+.separator {
+	position: absolute;
+	left: 0;
+	width: 2.5em;
+	height: 100%;
+
+	&:before {
+		position: absolute;
+		right: 0;
+		content: '';
+		background: var(--color-green);
+		height: calc(50% - 2.5em);
+		width: 2.5em;
+	}
+
+	&:after {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		content: '';
+		background: var(--color-green);
+		height: calc(50% - 2.5em);
+		width: 2.5em;
+	}
+}
+
+.arrow {
+	height: 100%;
+
+	&:before {
+		content: '';
+		position: absolute;
+	    width: 0;
+	    right: 0;
+	    height: 0;
+	    top: 50%;
+	    transform: translateY(-100%);
+	    border-top: 2.5em solid var(--color-green);
+	    border-right: 2.5em solid transparent;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+	    right: 0;
+	    top: 50%;
+	    border-bottom: 2.5em solid var(--color-green);
+	    border-right: 2.5em solid transparent;
+	}
 }
